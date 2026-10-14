@@ -1,0 +1,795 @@
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#4f46e5">
+  <title>فاکتورینو | فاکتور فروش</title>
+
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-light: #eef2ff;
+      --background: #f4f6fb;
+      --text: #202944;
+      --muted: #737d93;
+      --border: #e3e7f0;
+      --green: #15803d;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Tahoma, Arial, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    button, input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      filter: brightness(0.95);
+    }
+
+    .container {
+      width: min(100% - 32px, 1000px);
+      margin: 32px auto;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #3730a3, #6366f1);
+      color: white;
+      border-radius: 22px;
+      padding: 26px 30px;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      box-shadow: 0 12px 30px #4f46e51c;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .logo {
+      display: grid;
+      place-items: center;
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      background: #ffffff24;
+      font-size: 28px;
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: 25px;
+    }
+
+    .hero p {
+      margin: 3px 0 0;
+      color: #e0e7ff;
+      font-size: 13px;
+    }
+
+    .hero-tag {
+      border: 1px solid #ffffff50;
+      border-radius: 30px;
+      padding: 7px 14px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .card {
+      background: white;
+      border: 1px solid #edf0f6;
+      border-radius: 18px;
+      padding: 24px;
+      margin-bottom: 20px;
+      box-shadow: 0 5px 20px #1e293b08;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 17px;
+      font-weight: bold;
+      margin: 0 0 18px;
+    }
+
+    .section-icon {
+      width: 35px;
+      height: 35px;
+      border-radius: 11px;
+      display: grid;
+      place-items: center;
+      background: var(--primary-light);
+      color: var(--primary);
+      font-size: 18px;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      min-width: 0;
+    }
+
+    .field label {
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .field input,
+    .item-input {
+      width: 100%;
+      min-width: 0;
+      padding: 11px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      outline: none;
+      background: #fff;
+      color: var(--text);
+    }
+
+    input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px #4f46e516;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      width: 100%;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 620px;
+    }
+
+    th {
+      background: #f7f8fc;
+      color: #58627a;
+      font-size: 12px;
+      font-weight: bold;
+      padding: 13px 10px;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 12px 8px;
+      border-bottom: 1px solid #edf0f6;
+      vertical-align: middle;
+    }
+
+    tbody tr:last-child td {
+      border-bottom: none;
+    }
+
+    .item-input {
+      padding: 9px 10px;
+      font-size: 13px;
+    }
+
+    .number-input {
+      width: 95px;
+    }
+
+    .price-input {
+      width: 145px;
+    }
+
+    .subtotal {
+      font-size: 13px;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .remove-button {
+      border: 0;
+      border-radius: 9px;
+      background: #fff1f2;
+      color: #be123c;
+      padding: 7px 10px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .remove-button:hover {
+      background: #ffe4e6;
+    }
+
+    .table-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 17px;
+      flex-wrap: wrap;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 12px;
+      margin: 0;
+    }
+
+    .button {
+      border: none;
+      border-radius: 10px;
+      padding: 11px 17px;
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .button-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .button-secondary {
+      background: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .totals {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      background: #f0fdf4;
+      border: 1px solid #dcfce7;
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-top: 22px;
+    }
+
+    .totals-label {
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .totals-label small {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: normal;
+    }
+
+    .total-amount {
+      color: var(--green);
+      font-size: clamp(18px, 3vw, 26px);
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .total-amount small {
+      font-size: 12px;
+      font-weight: normal;
+    }
+
+    .note {
+      width: 100%;
+      min-height: 85px;
+      resize: vertical;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font: inherit;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .footer-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 12px;
+      padding: 8px 0 25px;
+    }
+
+    @media (max-width: 650px) {
+      .container {
+        width: calc(100% - 20px);
+        margin: 14px auto;
+      }
+
+      .hero {
+        padding: 20px 16px;
+        border-radius: 16px;
+      }
+
+      .hero h1 {
+        font-size: 20px;
+      }
+
+      .hero-tag {
+        display: none;
+      }
+
+      .logo {
+        width: 44px;
+        height: 44px;
+        font-size: 23px;
+      }
+
+      .card {
+        padding: 16px 12px;
+        border-radius: 15px;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .totals {
+        padding: 14px 12px;
+      }
+
+      .footer-actions {
+        flex-direction: column;
+      }
+
+      .footer-actions .button {
+        width: 100%;
+      }
+    }
+
+    @page {
+      size: A4;
+      margin: 14mm;
+    }
+
+    @media print {
+      body {
+        background: white;
+        color: #111827;
+        font-size: 11px;
+      }
+
+      .container {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+      }
+
+      .hero {
+        background: #eef2ff !important;
+        color: #1e1b4b !important;
+        box-shadow: none;
+        border: 1px solid #c7d2fe;
+        padding: 16px 20px;
+        margin-bottom: 12px;
+        border-radius: 10px;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .hero p {
+        color: #4338ca;
+      }
+
+      .hero-tag {
+        border-color: #a5b4fc;
+      }
+
+      .logo {
+        background: #e0e7ff;
+      }
+
+      .card {
+        box-shadow: none;
+        border: 1px solid #d1d5db;
+        border-radius: 10px;
+        padding: 14px;
+        margin-bottom: 12px;
+        break-inside: avoid;
+      }
+
+      .section-title {
+        margin-bottom: 10px;
+      }
+
+      .section-icon {
+        background: #eef2ff !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .no-print,
+      .remove-column,
+      .remove-button,
+      .table-actions,
+      .footer-actions,
+      .footer {
+        display: none !important;
+      }
+
+      .table-wrap {
+        overflow: visible;
+      }
+
+      table {
+        min-width: 0;
+        table-layout: fixed;
+        font-size: 10px;
+      }
+
+      th, td {
+        padding: 8px 5px;
+        overflow-wrap: anywhere;
+      }
+
+      th {
+        background: #f3f4f6 !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .item-input,
+      .field input,
+      .note {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 2px 0;
+        background: transparent !important;
+        color: #111827;
+        font-size: 11px;
+        resize: none;
+        appearance: none;
+      }
+
+      .item-input {
+        width: 100%;
+      }
+
+      .number-input,
+      .price-input {
+        width: 100%;
+      }
+
+      input::placeholder,
+      textarea::placeholder {
+        color: transparent;
+      }
+
+      .totals {
+        background: #f0fdf4 !important;
+        border-color: #bbf7d0;
+        padding: 12px 16px;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+      }
+
+      .total-amount {
+        color: #166534 !important;
+      }
+
+      .note {
+        min-height: 35px;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="container">
+
+    <header class="hero">
+      <div class="brand">
+        <div class="logo">🧾</div>
+        <div>
+          <h1>فاکتورینو</h1>
+          <p>فاکتور فروش ساده و حرفه‌ای</p>
+        </div>
+      </div>
+      <div class="hero-tag">نسخه فروشگاه کوچک</div>
+    </header>
+
+    <section class="card">
+      <h2 class="section-title">
+        <span class="section-icon">🏪</span>
+        اطلاعات فاکتور
+      </h2>
+
+      <div class="info-grid">
+        <div class="field">
+          <label for="storeName">نام فروشگاه</label>
+          <input id="storeName" type="text"
+                 placeholder="مثلاً فروشگاه آفتاب"
+                 value="فروشگاه آفتاب">
+        </div>
+
+        <div class="field">
+          <label for="invoiceDate">تاریخ فاکتور</label>
+          <input id="invoiceDate" type="date">
+        </div>
+
+        <div class="field">
+          <label for="customerName">نام مشتری (اختیاری)</label>
+          <input id="customerName" type="text"
+                 placeholder="نام مشتری">
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">
+        <span class="section-icon">📦</span>
+        کالاهای فاکتور
+      </h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th style="width: 34%">نام کالا</th>
+              <th style="width: 13%">تعداد</th>
+              <th style="width: 23%">قیمت واحد (تومان)</th>
+              <th style="width: 20%">مبلغ ردیف</th>
+              <th class="remove-column" style="width: 10%">حذف</th>
+            </tr>
+          </thead>
+          <tbody id="itemsBody"></tbody>
+        </table>
+      </div>
+
+      <div class="table-actions no-print">
+        <p class="hint">قیمت‌ها را به تومان وارد کن.</p>
+        <button type="button" class="button button-secondary"
+                id="addItemButton">
+          ＋ افزودن کالا
+        </button>
+      </div>
+
+      <div class="totals">
+        <div class="totals-label">
+          جمع کل فاکتور
+          <small id="itemCount">۰ قلم کالا</small>
+        </div>
+        <div class="total-amount">
+          <span id="grandTotal">۰</span>
+          <small>تومان</small>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">
+        <span class="section-icon">📝</span>
+        توضیحات
+      </h2>
+      <textarea id="invoiceNote" class="note"
+                placeholder="توضیحات یا پیام دلخواه برای مشتری (اختیاری)"></textarea>
+    </section>
+
+    <div class="footer-actions no-print">
+      <button type="button" class="button button-secondary"
+              id="clearButton">
+        پاک کردن کالاها
+      </button>
+      <button type="button" class="button button-primary"
+              id="printButton">
+        🖨️ چاپ فاکتور / ذخیره PDF
+      </button>
+    </div>
+
+    <footer class="footer">
+      ساخته‌شده با HTML، CSS و JavaScript
+    </footer>
+
+  </main>
+
+  <script>
+    const itemsBody = document.getElementById("itemsBody");
+    const grandTotal = document.getElementById("grandTotal");
+    const itemCount = document.getElementById("itemCount");
+
+    const numberFormat = new Intl.NumberFormat("fa-IR");
+
+    // تاریخ امروز را بدون وابستگی به منطقه زمانی تنظیم می‌کنیم.
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const day = String(now.getDate()).padStart(2, "0");
+
+    document.getElementById("invoiceDate").value =
+      `${year}-${month}-${day}`;
+
+    // تبدیل مقدار ورودی به عدد صحیح نامنفی
+    function readNumber(input) {
+      const value = Number(input.value);
+
+      if (!Number.isFinite(value) || value < 0) {
+        return 0;
+      }
+
+      return Math.floor(value);
+    }
+
+    // ساخت یک ردیف کالا
+    function addItem(name = "", quantity = 1, price = 0) {
+      const row = document.createElement("tr");
+
+      const nameCell = document.createElement("td");
+      const nameInput = document.createElement("input");
+      nameInput.type = "text";
+      nameInput.className = "item-input";
+      nameInput.placeholder = "نام کالا";
+      nameInput.value = name;
+      nameInput.setAttribute("aria-label", "نام کالا");
+      nameCell.appendChild(nameInput);
+
+      const quantityCell = document.createElement("td");
+      const quantityInput = document.createElement("input");
+      quantityInput.type = "number";
+      quantityInput.min = "0";
+      quantityInput.step = "1";
+      quantityInput.inputMode = "numeric";
+      quantityInput.className = "item-input number-input";
+      quantityInput.value = quantity;
+      quantityInput.setAttribute("aria-label", "تعداد");
+      quantityCell.appendChild(quantityInput);
+
+      const priceCell = document.createElement("td");
+      const priceInput = document.createElement("input");
+      priceInput.type = "number";
+      priceInput.min = "0";
+      priceInput.step = "1";
+      priceInput.inputMode = "numeric";
+      priceInput.className = "item-input price-input";
+      priceInput.value = price;
+      priceInput.setAttribute("aria-label", "قیمت واحد به تومان");
+      priceCell.appendChild(priceInput);
+
+      const subtotalCell = document.createElement("td");
+      const subtotal = document.createElement("span");
+      subtotal.className = "subtotal";
+      subtotal.textContent = "۰";
+      subtotalCell.appendChild(subtotal);
+
+      const removeCell = document.createElement("td");
+      removeCell.className = "remove-column";
+
+      const removeButton = document.createElement("button");
+      removeButton.type = "button";
+      removeButton.className = "remove-button";
+      removeButton.textContent = "حذف";
+      removeButton.setAttribute("aria-label", "حذف این کالا");
+
+      removeButton.addEventListener("click", function () {
+        row.remove();
+        updateTotals();
+      });
+
+      removeCell.appendChild(removeButton);
+
+      row.append(
+        nameCell,
+        quantityCell,
+        priceCell,
+        subtotalCell,
+        removeCell
+      );
+
+      // با تغییر تعداد یا قیمت، محاسبات به‌روز می‌شوند.
+      quantityInput.addEventListener("input", updateTotals);
+      priceInput.addEventListener("input", updateTotals);
+
+      itemsBody.appendChild(row);
+      updateTotals();
+    }
+
+    // محاسبه مبلغ ردیف‌ها و جمع کل
+    function updateTotals() {
+      let total = 0;
+      let count = 0;
+
+      const rows = itemsBody.querySelectorAll("tr");
+
+      rows.forEach(function (row) {
+        const inputs = row.querySelectorAll("input");
+        const name = inputs[0].value.trim();
+        const quantity = readNumber(inputs[1]);
+        const price = readNumber(inputs[2]);
+
+        const subtotal = quantity * price;
+        total += subtotal;
+
+        row.querySelector(".subtotal").textContent =
+          numberFormat.format(subtotal);
+
+        if (name !== "") {
+          count++;
+        }
+      });
+
+      grandTotal.textContent = numberFormat.format(total);
+      itemCount.textContent =
+        numberFormat.format(count) + " قلم کالا";
+    }
+
+    // افزودن کالا
+    document.getElementById("addItemButton")
+      .addEventListener("click", function () {
+        addItem();
+      });
+
+    // پاک کردن همه ردیف‌ها
+    document.getElementById("clearButton")
+      .addEventListener("click", function () {
+        if (itemsBody.children.length === 0) {
+          addItem();
+          return;
+        }
+
+        const confirmed = confirm(
+          "آیا می‌خواهی تمام کالاهای فاکتور حذف شوند؟"
+        );
+
+        if (confirmed) {
+          itemsBody.replaceChildren();
+          addItem();
+        }
+      });
+
+    // بررسی اولیه و باز کردن پنجره چاپ
+    document.getElementById("printButton")
+      .addEventListener("click", function () {
+        updateTotals();
+
+        const storeName =
+          document.getElementById("storeName").value.trim();
+
+        if (!storeName) {
+          alert("لطفاً نام فروشگاه را وارد کن.");
+          document.getElementById("storeName").focus();
+          return;
+        }
+
+        if (itemsBody.children.length === 0) {
+          alert("لطفاً حداقل یک قلم کالا اضافه کن.");
+          return;
+        }
+
+        window.print();
+      });
+
+    // شروع با دو ردیف نمونه برای آزمایش آسان‌تر
+    addItem("دفتر ۱۰۰ برگ", 2, 80000);
+    addItem("خودکار آبی", 3, 15000);
+  </script>
+</body>
+</html>
